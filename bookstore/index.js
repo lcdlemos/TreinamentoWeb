@@ -1,19 +1,25 @@
-const express = require('express');                 // IMPORTANDO EXPRESS PARA ROTAS
-const exphbs = require('express-handlebars');       // IMPOTANDO HANDLEBARS PARA TEMPLATES DO FRONT
+const express = require('express');                     // IMPORTANDO EXPRESS PARA USAR ROTAS
+const exphbs = require('express-handlebars');           // IMPOTANDO HANDLEBARS PARA TEMPLATES DO FRONT
 
-const conn = require('./db/conn');                 // IMPORTANDO CONN DA PASTA DB/CONN
+const booksRoutes = require('./routes/booksRoutes');    // IMPORTANDO AS ROTAS
 
-const app = express();                              // INICIALIZANDO EXPRESS
+const conn = require('./db/conn');                      // IMPORTANDO CONN DA PASTA DB/CONN
 
-app.engine('handlebars', exphbs.engine());          // CONFIGURAR HANDLEBARS COM ENGINE
-app.set('view engine', 'handlebars');               // ATRIBUTO DE VIEW ENGINE FEITO PELO HANDLEBARS
+const app = express();                                  // INICIALIZANDO EXPRESS
 
-app.use(                                            // MIDDLEWARE PARA LER O BODY
+app.engine('handlebars', exphbs.engine());              // CONFIGURAR HANDLEBARS COM ENGINE
+app.set('view engine', 'handlebars');                   // ATRIBUTO DE VIEW ENGINE FEITO PELO HANDLEBARS
+
+app.use(                                                // MIDDLEWARE PARA LER O BODY
     express.urlencoded({
         extended: true
     })
 );
 
-app.use(express.json());                              // LER FORMATO JSON
+app.use(express.json());                                // LER FORMATO JSON
 
-app.listen(3000);                                     // INICIANDO EXPRESS NA PORTA 3000 PARA ACESSAR PELO NAVEGADOR
+app.use(express.static('public'));                      // DEFINIÇÃO DOS ASSETS COM MIDDLEWARE
+
+app.use('/books', booksRoutes);                         // CHAMA A ROTA DOS BOOKS EM /
+
+app.listen(3000);                                       // INICIANDO EXPRESS NA PORTA 3000 PARA ACESSAR PELO NAVEGADOR
