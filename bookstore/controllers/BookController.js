@@ -25,9 +25,7 @@ module.exports = class BookController {
 
     static async getBook(req, res) {
         const id = req.params.id;                            // PARÂMETROS PELA URL
-
         const book = await Book.getBookById(id);
-
         res.render('books/book', {book});
     };
 
@@ -36,4 +34,24 @@ module.exports = class BookController {
         Book.removeBookById(id);
         res.redirect('/books');
     }
+
+    static async editBook(req, res) {
+        const id = req.params.id;
+        const book = await Book.getBookById(id);
+        res.render('books/edit', {book});
+    };
+
+    static async editBookPost(req, res) {
+        const id = req.body.id;
+        const name = req.body.name;
+        const image = req.body.image;
+        const price = req.body.price;
+        const description = req.body.description;
+
+        const book = new Book(name, image, price, description);
+
+        await book.updateBook(id);
+
+        res.redirect('/books');
+    };
 };

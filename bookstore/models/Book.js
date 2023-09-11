@@ -36,6 +36,11 @@ class Book {                                                // CRIANDO CLASSE BO
         await conn.db().collection('bookstore').deleteOne({ _id: new mongo.ObjectId(id) });
         return;
     }
+
+    updateBook(id) {
+        conn.db().collection('bookstore').updateOne({ _id: new mongo.ObjectId(id) }, {$set: this});     // OPERADOR DE FILTRAGEM SET
+        return;
+    };
 };
 
 module.exports = Book;
