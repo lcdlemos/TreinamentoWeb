@@ -12,11 +12,12 @@ module.exports = class BookController {
 
     static addBookPost(req, res) {
         const name = req.body.name;                         // PEGANDO DADOS DO BODY PARA ESCREVER NO BANCO
+        const author = req.body.author;
         const image = req.body.image;                       // PRÂMETROS PELO POST
         const price = req.body.price;
         const description = req.body.description;
         
-        const book = new Book(name, image, price, description);    // INSTÂNCIA DE BOOK COM OS DADOS NA ORDEM DO CONSTRUTOR
+        const book = new Book(name, author, image, price, description);    // INSTÂNCIA DE BOOK COM OS DADOS NA ORDEM DO CONSTRUTOR
 
         book.save();                                        // SALVAR OS DADOS DO BOOK NO BANCO PELO MÉTODO SAVE
 
@@ -44,11 +45,12 @@ module.exports = class BookController {
     static async editBookPost(req, res) {
         const id = req.body.id;
         const name = req.body.name;
+        const author = req.body.author;
         const image = req.body.image;
         const price = req.body.price;
         const description = req.body.description;
 
-        const book = new Book(name, image, price, description);
+        const book = new Book(name, author, image, price, description);
 
         await book.updateBook(id);
 
