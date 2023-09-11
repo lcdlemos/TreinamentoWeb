@@ -1,5 +1,7 @@
 const conn = require('../db/conn');                         // ADICIONA MÓDULO CONEXÃO EM MONGODB
 
+const mongo = require('mongodb');                           // IMPORTAR PARA USAR O OBJECT ID DO MONGO
+
 class Book {                                                // CRIANDO CLASSE BOOK
     constructor(name, image, price, description) {                 // CONSTRUTOR COM PROPRIEDADES PREENCHIDAS
         this.name = name;
@@ -24,6 +26,16 @@ class Book {                                                // CRIANDO CLASSE BO
     
         return books;
     };
+
+    static async getBookById(id) {
+        const book = await conn.db().collection('bookstore').findOne({ _id: new mongo.ObjectId(id) });
+        return book;
+    };
+
+    static async removeBookById(id) {
+        await conn.db().collection('bookstore').deleteOne({ _id: new mongo.ObjectId(id) });
+        return;
+    }
 };
 
 module.exports = Book;

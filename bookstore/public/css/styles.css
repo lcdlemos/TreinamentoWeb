@@ -84,10 +84,19 @@ form input[type='submit'], .btn {
 }
 
 .book img {
-  max-width: 100%;
+  max-width: 200px;
   margin-bottom: 0.5em;
 }
 
 .book h3 {
+  margin-bottom: 1em;
+}
+
+.book-page img {
+  max-width: 200px;
+  margin-bottom: 1em;
+}
+
+.book-page p {
   margin-bottom: 1em;
 }

@@ -12,7 +12,7 @@ module.exports = class BookController {
 
     static addBookPost(req, res) {
         const name = req.body.name;                         // PEGANDO DADOS DO BODY PARA ESCREVER NO BANCO
-        const image = req.body.image;
+        const image = req.body.image;                       // PRÂMETROS PELO POST
         const price = req.body.price;
         const description = req.body.description;
         
@@ -22,4 +22,18 @@ module.exports = class BookController {
 
         res.redirect('/books');                             // REDIRECIONA PARA PÁGINA DE TODOS OS LIVROS
     };
+
+    static async getBook(req, res) {
+        const id = req.params.id;                            // PARÂMETROS PELA URL
+
+        const book = await Book.getBookById(id);
+
+        res.render('books/book', {book});
+    };
+
+    static async removeBook(req, res) {
+        const id = req.params.id;
+        Book.removeBookById(id);
+        res.redirect('/books');
+    }
 };
