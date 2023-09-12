@@ -1,6 +1,10 @@
 const Book = require('../models/Book');             // IMPORTANDO MODELO DO BOOK
 
 module.exports = class BookController {
+    static homeBooks(req, res) {
+        res.render('home');
+    };
+    
     static async showBooks(req, res) {                      // REQUISIÇÃO E RESPOSTA DO MÉTODO
         const books = await Book.getBooks();                // BOOKS ESPERA A CONSULTA AO BANCO
         res.render('books/all', {books});                   // RENDERIZAR PASSANDO DADOS DE BOOKS PARA VIEW

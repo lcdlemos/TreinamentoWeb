@@ -10,16 +10,12 @@ const app = express();                                  // INICIALIZANDO EXPRESS
 app.engine('handlebars', exphbs.engine());              // CONFIGURAR HANDLEBARS COM ENGINE
 app.set('view engine', 'handlebars');                   // ATRIBUTO DE VIEW ENGINE FEITO PELO HANDLEBARS
 
-app.use(                                                // MIDDLEWARE PARA LER O BODY
-    express.urlencoded({
-        extended: true
-    })
-);
+app.use( express.urlencoded({ extended: true }) );      // MIDDLEWARE PARA LER O BODY
 
 app.use(express.json());                                // LER FORMATO JSON
 
 app.use(express.static('public'));                      // DEFINIÇÃO DOS ASSETS COM MIDDLEWARE
 
-app.use('/books', booksRoutes);                         // CHAMA A ROTA DOS BOOKS EM /
+app.use('/', booksRoutes);                         // CHAMA A ROTA DOS BOOKS EM /
 
 app.listen(3000);                                       // INICIANDO EXPRESS NA PORTA 3000 PARA ACESSAR PELO NAVEGADOR
