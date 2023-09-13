@@ -31,6 +31,24 @@
   font-weight: bold;
 }
 
+.home{
+  text-align: center;
+}
+
+.enter {
+  max-width: 600px;
+  margin-bottom: 2em;
+  margin-top: 2em;
+}
+
+.img-container {
+  text-align: center;
+}
+
+.link{
+  text-align: center;
+}
+
 .container {
   padding: 2em;
 }
