@@ -25,7 +25,6 @@ class Book {                                                // CRIANDO CLASSE BO
 
     static getBooks() {
         const books = conn.db().collection('bookstore').find().toArray();      // ACESSA O BANCO E CONVERTE O DADO PARA ARRAY
-    
         return books;
     };
 
